@@ -1,0 +1,36 @@
+;USE STANDARD e q0 como simbolo inicial.
+;Insercao inicial do simbolo '#' no inicio da fita se ainda nao estiver presente
+q0 * * L q1
+q1 * # R 0
+
+; Transicoes da maquina de Turing original
+;S
+0 0 0 r 1
+0 1 1 r 1
+1 0 0 r 0
+1 1 1 r 0
+1 _ _ l 2
+2 x x l 2
+2 0 x l 3
+2 1 x l 3
+3 0 0 r 4
+3 1 1 r 4
+3 x 1 r 6
+4 x x r 4
+4 1 1 r 4
+4 _ 1 l 5
+5 1 1 l 5
+5 x x l 2
+6 1 1 r 6
+6 x 1 r 6
+6 _ _ l halt-accept
+
+; Transicoes para gerenciar a leitura de '#'
+1 # * R 1
+5 # * R 5
+3 # * R 3
+halt-accept # * R halt-accept
+2 # * R 2
+4 # * R 4
+6 # * R 6
+0 # * R 0
